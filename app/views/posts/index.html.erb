@@ -1,0 +1,17 @@
+<h2>投稿一覧</h2>
+
+<% @posts.each do |post| %>
+<div>
+  <p>料理名：<%= post.cooking_name %></p>
+  <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
+  <p>店名：<%= post.shop_name %></p>
+  <p>場所：<%= post.address %></p>
+  <p>コメント：<%= post.comment %></p>
+  <p>ユーザーネーム：<%= post.user.name %></p>
+  <p>投稿ユーザー画像：<%= attachment_image_tag @user, :user_image, :fill, 60, 60, fallback: "no_image.jpg"%></p>
+  <% if post.user == current_user %>
+    <p><%= link_to "編集", edit_post_path(post.id) %></p>
+    <%= link_to "削除", post_path(post.id), method: :delete %>
+  <% end %>
+</div>
+<% end %>

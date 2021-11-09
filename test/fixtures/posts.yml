@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cooking_name: MyString
+  cooking_image_id: MyString
+  shop_name: MyString
+  address: MyString
+  comment: MyString
+
+two:
+  cooking_name: MyString
+  cooking_image_id: MyString
+  shop_name: MyString
+  address: MyString
+  comment: MyString

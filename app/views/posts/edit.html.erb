@@ -1,0 +1,20 @@
+<h2>投稿編集</h2>
+
+<%= form_with model:@post, local:true do |f| %>
+  <h4>料理名</h4>
+  <%= f.text_field :cooking_name %>
+
+  <h4>料理の写真</h4>
+  <%= f.attachment_field :cooking_image %>
+
+  <h4>店名</h4>
+  <%= f.text_field :shop_name %>
+
+  <h4>場所</h4>
+  <%= f.text_area :address %>
+
+  <h4>コメント</h4>
+  <%= f.text_area :comment %>
+
+  <%= f.submit "変更を保存" %>
+<% end %>
