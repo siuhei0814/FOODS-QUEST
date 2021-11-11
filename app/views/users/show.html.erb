@@ -11,3 +11,19 @@
 <% if @user.id == current_user.id %>
   <p><%= link_to "新規投稿", new_post_path(@user) %></p>
 <% end %>
+
+<h2>過去の投稿</h2>
+
+<% @posts.each do |post| %>
+<div>
+  <p>料理名：<%= post.cooking_name %></p>
+  <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
+  <p>店名：<%= post.shop_name %></p>
+  <p>場所：<%= post.address %></p>
+  <p>コメント：<%= post.comment %></p>
+  <% if post.user == current_user %>
+    <%= link_to "編集", edit_post_path(post.id) %>
+    <%= link_to "削除", post_path(post.id), method: :delete %>
+  <% end %>
+</div>
+<% end %>

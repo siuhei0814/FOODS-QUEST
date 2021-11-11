@@ -1,0 +1,54 @@
+<% if (@content1.present? && @content2.blank?) %>
+  <h3>【検索結果】検索ワード：<%= @content1 %></h3>
+  <% @posts.each do |post| %>
+    <div>
+      <p>料理名：<%= post.cooking_name %></p>
+      <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
+      <p>店名：<%= post.shop_name %></p>
+      <p>場所：<%= post.address %></p>
+      <p>コメント：<%= post.comment %></p>
+      <p>ユーザーネーム：<%= post.user.name %></p>
+      <% if post.user == current_user %>
+        <%= link_to "編集", edit_post_path(post.id) %>
+        <%= link_to "削除", post_path(post.id), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+
+<% elsif (@content1.blank? && @content2.present?) %>
+  <h3>【検索結果】検索ワード：<%= @content2 %></h3>
+  <% @posts.each do |post| %>
+    <div>
+      <p>料理名：<%= post.cooking_name %></p>
+      <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
+      <p>店名：<%= post.shop_name %></p>
+      <p>場所：<%= post.address %></p>
+      <p>コメント：<%= post.comment %></p>
+      <p>ユーザーネーム：<%= post.user.name %></p>
+      <% if post.user == current_user %>
+        <%= link_to "編集", edit_post_path(post.id) %>
+        <%= link_to "削除", post_path(post.id), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+
+<% elsif (@content1.present? && @content2.present?) %>
+  <h3>【検索結果】検索ワード：<%= @content1 %>、<%= @content2 %></h3>
+  <% @posts.each do |post| %>
+    <div>
+      <p>料理名：<%= post.cooking_name %></p>
+      <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
+      <p>店名：<%= post.shop_name %></p>
+      <p>場所：<%= post.address %></p>
+      <p>コメント：<%= post.comment %></p>
+      <p>ユーザーネーム：<%= post.user.name %></p>
+      <% if post.user == current_user %>
+        <%= link_to "編集", edit_post_path(post.id) %>
+        <%= link_to "削除", post_path(post.id), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+
+<% else %>
+  <h3>言葉を入れてちょ！</h3>
+<% end %>

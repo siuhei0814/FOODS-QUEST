@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   resources :posts, only:[:new,:create,:index,:edit,:update,:destroy]
 
+  get '/search', to: 'searchs#search'
+
 end
