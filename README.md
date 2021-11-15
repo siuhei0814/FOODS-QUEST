@@ -24,4 +24,4 @@ Things you may want to cover:
 * ...
 
 <!--以下、EC2へSSHでログインするときのコマンド-->
-<!--「ssh -i ~/.ssh/practice-aws.pem ec2-user@35.77.7.54」-->
+<!--「ssh -i ~/.ssh/practice-aws.pem ec2-user@〇〇」-->

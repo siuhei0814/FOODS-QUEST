@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :users, only:[:show,:edit,:update]
 
-  resources :posts, only:[:new,:create,:index,:edit,:update,:destroy]
+  resources :posts, only:[:new,:create,:index,:edit,:update,:destroy] do
+    resources :comments, only: [:create, :destroy]
+  end
 
   get '/search', to: 'searchs#search'
 
