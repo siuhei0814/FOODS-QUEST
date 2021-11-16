@@ -1,51 +1,68 @@
 <h2>投稿一覧</h2>
 
-<% @posts.each do |post| %>
-  <div>
-    <p>料理名：<%= post.cooking_name %></p>
-    <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
-    <p>店名：<%= post.shop_name %></p>
-    <p>場所：<%= post.address %></p>
-    <p>コメント：<%= post.comment %></p>
-    <p>ユーザーネーム：<%= post.user.name %></p>
-    <p>投稿ユーザー画像：<%= attachment_image_tag @user, :user_image, :fill, 60, 60, fallback: "no_image.jpg"%></p>
-    <% if post.user == current_user %>
-      <%= link_to "編集", edit_post_path(post.id) %>
-      <%= link_to "削除", post_path(post.id), method: :delete %>
-    <% end %>
-  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>料理</th>
+      <th>店名</th>
+      <th>場所</th>
+      <th>コメント</th>
+      <th>投稿者</th>
+    </tr>
+  </thead>
 
-  <% if post.favorited_by?(current_user) %>
-    <p>
-      <%= link_to post_favorites_path(post), method: :delete do %>
-        ♥<%= post.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(post), method: :post do %>
-        ♡<%= post.favorites.count %> いいね
-      <% end %>
-    </p>
+  <% @posts.each do |post| %>
+    <tbody>
+      <tr>
+        <th>
+          <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %><br>
+          <%= post.cooking_name %>
+        </th>
+        <th><%= post.shop_name %></th>
+        <th><%= post.address %></th>
+        <th><%= post.comment %></th>
+        <th>
+          <%= post.user.name %><br>
+          <%= attachment_image_tag @user, :user_image, :fill, 60, 60, fallback: "no_image.jpg"%><br>
+
+          <% if post.user == current_user %>
+            <%= link_to "編集", edit_post_path(post.id), class: 'btn btn-success' %>
+            <%= link_to "削除", post_path(post.id), method: :delete, class: 'btn btn-danger' %>
+          <% end %>
+        </th>
+
+        <th>
+          <% if post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(post), method: :delete do %>
+              ♥<%= post.favorites.count %> いいね<br>
+            <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(post), method: :post do %>
+              ♡<%= post.favorites.count %> いいね<br>
+            <% end %>
+          <% end %>
+
+          <p>コメント件数：<%= post.comments.count %></p>
+          <% post.comments.each do |comment| %>
+            <div>
+              <%= comment.user.name %>
+              <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+              <%= comment.comment %>
+              <% if comment.user == current_user %>
+                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: 'btn btn-danger' %>
+              <% end %>
+            </div>
+          <% end %>
+        </th>
+
+        <th>
+          <%= form_with(url: post_comments_path(post.id), local: true) do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+            <%= f.submit "送信する", class: 'btn btn-success' %>
+          <% end %>
+        </th>
+      </tr>
+    </tbody>
   <% end %>
 
-  <div>
-    <p>コメント件数：<%= post.comments.count %></p>
-    <% post.comments.each do |comment| %>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-      <% if comment.user == current_user %>
-        <div>
-          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form_with(url: post_comments_path(post.id), local: true) do |f| %>
-      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
-<% end %>
+</table>

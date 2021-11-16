@@ -5,25 +5,42 @@
 </div>
 
 <% if @user.id == current_user.id %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-success' %></p>
 <% end %>
 
 <% if @user.id == current_user.id %>
-  <p><%= link_to "新規投稿", new_post_path(@user) %></p>
+  <p><%= link_to "新規投稿", new_post_path(@user), class: 'btn btn-success' %></p>
 <% end %>
 
 <h2>過去の投稿</h2>
 
-<% @posts.each do |post| %>
-<div>
-  <p>料理名：<%= post.cooking_name %></p>
-  <p>料理の写真：<%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %></p>
-  <p>店名：<%= post.shop_name %></p>
-  <p>場所：<%= post.address %></p>
-  <p>コメント：<%= post.comment %></p>
-  <% if post.user == current_user %>
-    <%= link_to "編集", edit_post_path(post.id) %>
-    <%= link_to "削除", post_path(post.id), method: :delete %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>料理</th>
+      <th>店名</th>
+      <th>場所</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+
+  <% @posts.each do |post| %>
+    <tbody>
+      <tr>
+        <th>
+          <%= post.cooking_name %><br>
+          <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %>
+        </th>
+        <th><%= post.shop_name %></th>
+        <th><%= post.address %></th>
+        <th><%= post.comment %></th>
+        <th>
+          <% if post.user == current_user %>
+            <%= link_to "編集", edit_post_path(post.id) %>
+            <%= link_to "削除", post_path(post.id), method: :delete %>
+          <% end %>
+        </th>
+      </tr>
+    </tbody>
   <% end %>
-</div>
-<% end %>
+</table>
