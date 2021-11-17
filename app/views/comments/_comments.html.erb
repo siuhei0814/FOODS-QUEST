@@ -1,0 +1,19 @@
+<% @post.comments.each do |comment| %>
+  <div style="text-inline:center; border-top:1px solid #0000ff;">
+    <%= comment.user.name %>
+    （<%= comment.created_at.strftime('%Y/%m/%d') %>）
+    <% if comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: 'btn btn-danger' %>
+    <% end %>
+    <br>
+    <%= comment.comment %>
+  </div>
+<% end %>
+
+
+<div>
+  <%= form_with(url: post_comments_path(@post.id), remote: true) do |f| %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+    <%= f.submit "送信する", class: 'btn btn-success' %>
+  <% end %>
+</div>

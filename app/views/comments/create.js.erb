@@ -1,0 +1,4 @@
+$('#comment_number_<%= @post.id %>').html("<%= j(render "comments/number", post: @post) %>");
+
+$('#comment_buttons_<%= @post.id %>').html("<%= j(render "comments/comments", post: @post) %>");
+

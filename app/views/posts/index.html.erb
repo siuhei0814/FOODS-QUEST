@@ -32,17 +32,11 @@
             <% end %>
           </th>
 
-          <th>
-            <% if post.favorited_by?(current_user) %>
-              <%= link_to post_favorites_path(post), method: :delete do %>
-                ♥<%= post.favorites.count %> いいね<br>
-              <% end %>
-            <% else %>
-              <%= link_to post_favorites_path(post), method: :post do %>
-                ♡<%= post.favorites.count %> いいね<br>
-              <% end %>
-            <% end %>
+          <th id="favorite_buttons_<%= post.id %>">
+            <%= render "favorites/favorites", post: post %>
+          </th>
 
+          <th>
             <p>コメント数：<%= post.comments.count %>件</p><br>
             <%= link_to "コメント一覧はこちら", post_comment_path(id:post.id, post_id:post.id) %>
           </th>
