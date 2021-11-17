@@ -1,46 +1,51 @@
-<div>
-  <%= attachment_image_tag @user, :user_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-  <p>ユーザーネーム：<%= @user.name %></p>
-  <p>メモ：<%= @user.memo %></p>
+<div class="text-center", style="margin-top:50px;">
+  <h2>マイページ</h2>
+  <div>
+    <%= attachment_image_tag @user, :user_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+    <p>ユーザー名：<%= @user.name %></p>
+    <p>メモ：<%= @user.memo %></p>
+  </div>
+
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-success' %></p>
+  <% end %>
+
+  <% if @user.id == current_user.id %>
+    <%= link_to "新規投稿", new_post_path(@user), class: 'btn btn-success' %>
+  <% end %>
 </div>
 
-<% if @user.id == current_user.id %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-success' %></p>
-<% end %>
+<div class="mx-auto", style="width:80%;">
+  <h2 class="text-center", style="margin-top:50px;">過去の投稿</h2>
 
-<% if @user.id == current_user.id %>
-  <p><%= link_to "新規投稿", new_post_path(@user), class: 'btn btn-success' %></p>
-<% end %>
-
-<h2>過去の投稿</h2>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>料理</th>
-      <th>店名</th>
-      <th>場所</th>
-      <th>コメント</th>
-    </tr>
-  </thead>
-
-  <% @posts.each do |post| %>
-    <tbody>
+  <table class="table">
+    <thead>
       <tr>
-        <th>
-          <%= post.cooking_name %><br>
-          <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %>
-        </th>
-        <th><%= post.shop_name %></th>
-        <th><%= post.address %></th>
-        <th><%= post.comment %></th>
-        <th>
-          <% if post.user == current_user %>
-            <%= link_to "編集", edit_post_path(post.id) %>
-            <%= link_to "削除", post_path(post.id), method: :delete %>
-          <% end %>
-        </th>
+        <th>料理</th>
+        <th>店名</th>
+        <th>場所</th>
+        <th>コメント</th>
       </tr>
-    </tbody>
-  <% end %>
-</table>
+    </thead>
+
+    <% @posts.each do |post| %>
+      <tbody>
+        <tr>
+          <th>
+            <%= post.cooking_name %><br>
+            <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %>
+          </th>
+          <th><%= post.shop_name %></th>
+          <th><%= post.address %></th>
+          <th><%= post.comment %></th>
+          <th>
+            <% if post.user == current_user %>
+              <%= link_to "編集", edit_post_path(post.id), class:'btn btn-success' %>
+              <%= link_to "削除", post_path(post.id), method: :delete, class:'btn btn-danger' %>
+            <% end %>
+          </th>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
