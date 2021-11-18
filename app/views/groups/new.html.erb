@@ -1,0 +1,12 @@
+<h2>コミュニティ作成</h2>
+
+<%= form_with model:@group, local:true do |f| %>
+  <h4>コミュニティ名</h4>
+  <%= f.text_field :name %>
+  <h4>コンセプト</h4>
+  <%= f.text_field :introduction %>
+  <h4>コミュニティ写真</h4>
+  <%= f.attachment_field :group_image %>
+
+  <%= f.submit '作成' %>
+<% end %>

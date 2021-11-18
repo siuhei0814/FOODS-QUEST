@@ -1,5 +1,11 @@
 <div class="text-center", style="margin-top:50px;">
   <h2>マイページ</h2>
+
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-success' %></p>
+    <p><%= link_to "コミュニティ関連", groups_path, class: 'btn btn-success' %></p>
+  <% end %>
+
   <div>
     <%= attachment_image_tag @user, :user_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
     <p>ユーザー名：<%= @user.name %></p>
@@ -7,20 +13,16 @@
   </div>
 
   <% if @user.id == current_user.id %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-success' %></p>
-  <% end %>
-
-  <% if @user.id == current_user.id %>
     <%= link_to "新規投稿", new_post_path(@user), class: 'btn btn-success' %>
   <% end %>
 </div>
 
 <div class="mx-auto", style="width:80%;">
-  <h2 class="text-center", style="margin-top:50px;">過去の投稿</h2>
+  <h2 class="text-center", style="margin-top:20px;">過去の投稿</h2>
 
   <table class="table">
     <thead>
-      <tr>
+      <tr class="text-center">
         <th>料理</th>
         <th>店名</th>
         <th>場所</th>
@@ -30,10 +32,10 @@
 
     <% @posts.each do |post| %>
       <tbody>
-        <tr>
+        <tr class="text-center">
           <th>
-            <%= post.cooking_name %><br>
-            <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %>
+            <%= attachment_image_tag post, :cooking_image, :fill, 200, 200 %><br>
+            <%= post.cooking_name %>
           </th>
           <th><%= post.shop_name %></th>
           <th><%= post.address %></th>

@@ -3,7 +3,7 @@
 <div class="mx-auto", style="width:80%;">
   <table class="table">
     <thead>
-      <tr>
+      <tr class="text-center">
         <th>料理</th>
         <th>店名</th>
         <th>場所</th>
@@ -14,17 +14,17 @@
 
     <% @posts.each do |post| %>
       <tbody>
-        <tr>
+        <tr class="text-center">
           <th>
-            <%= attachment_image_tag post, :cooking_image, :fill, 60, 60 %><br>
-            <%= post.cooking_name %>
+            <%= attachment_image_tag post, :cooking_image, :fill, 200, 200 %><br>
+            <p><%= post.cooking_name %></p>
           </th>
           <th><%= post.shop_name %></th>
           <th><%= post.address %></th>
           <th><%= post.comment %></th>
           <th>
+            <%= attachment_image_tag post.user, :user_image, :fill, 60, 60, fallback: "no_image.jpg"%><br>
             <%= link_to post.user.name, user_path(post.user.id) %><br>
-            <%= attachment_image_tag @user, :user_image, :fill, 60, 60, fallback: "no_image.jpg"%><br>
 
             <% if post.user == current_user %>
               <%= link_to "編集", edit_post_path(post.id), class: 'btn btn-success' %>
