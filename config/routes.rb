@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resource :group_users, only: [:create, :destroy]
+    get '/search', to: 'searchs#group_search'
   end
 
 end

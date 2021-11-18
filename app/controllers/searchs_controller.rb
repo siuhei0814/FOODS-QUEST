@@ -37,4 +37,8 @@ class SearchsController < ApplicationController
     end
   end
 
+  def group_search
+    @group_users = GroupUser.where(user_id: params[:group_id]) 
+  end
+
 end
