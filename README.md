@@ -1,39 +1,38 @@
-# README
+# FOODS QUEST
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+食べたい料理を検索し、自宅近くでの店の検索や料理の検索ができる。
 
-* Ruby version
+### サイトテーマ
 
-* System dependencies
+食べたい料理を検索できる。
 
-* Configuration
+### テーマを選んだ理由
 
-* Database creation
+食べ歩きを趣味としているため、どこのお店のどの料理がどれくらい美味しかったのか、また特定の料理についてのコミュニティがあると情報共有が早くできると思ったため、本アプリを作成することにしました。
 
-* Database initialization
+### ターゲットユーザ
 
-* How to run the test suite
+全年齢層
 
-* Services (job queues, cache servers, search engines, etc.)
+### 主な利用シーン
 
-* Deployment instructions
+<...>
 
-* ...
+## 設計書
 
-<!--以下、EC2へSSHでログインするときのコマンド-->
-<!--「ssh -i ~/.ssh/practice-aws.pem ec2-user@35.72.35.88」-->
+<...>
 
-<!--以下、切るときのコマンド-->
-<!--「kill $(cat tmp/pids/puma.pid)」-->
+## チャレンジ要素一覧
 
-<!--以下、カリキュラムのEC2（踏み台サーバー）へログインするときのコマンド-->
-<!--「ssh -i ~/.ssh/dwc-practice1.pem ec2-user@13.115.218.216」-->
-<!--以下、バッチサーバー-->
-<!--「192.168.1.229」-->
+https://docs.google.com/spreadsheets/d/1E4Quehglf9PxM1XTE-ft2X5-hJ5dmoJhsI-UJlgzVmY/edit#gid=0
 
-<!--以下、専門技術コースの課題IPアドレス-->
-<!--ssh -i ~/.ssh/dwc-task.pem ec2-user@54.168.116.249	
+## 開発環境
+
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JS ライブラリ：jQuery
+- IDE：Cloud9
 
